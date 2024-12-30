@@ -1,13 +1,13 @@
+import type { TButtonProps } from "@/types";
+import React from "react";
+import './Button.css'
 
-function Button({ onClick, disabled }) {
+const Button: React.FC<TButtonProps> = ({ onClick, disabled }) => {
   return (
-    <input
-      type="button"
-      className="start-button"
-      value="Spin"
-      onClick={onClick}
-      disabled={disabled}
-    />
+<button role="button" className="golden-button" onClick={onClick} disabled={disabled} type="button">
+  <span className="golden-text">Spin</span>
+</button>
+
   );
 }
 

@@ -1,9 +1,12 @@
 import "./app.css"
 import SlotMachine from "./components/machine/SlotMachine"
+import usePrize from "./hooks/usePrize"
+
 
 function App() {
+  usePrize()
   return (
-   <div>
+   <div className="App">
     <SlotMachine />
    </div>
   )
