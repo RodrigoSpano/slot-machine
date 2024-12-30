@@ -10,7 +10,6 @@ const COLUMNS_NUM = 3
 export const useSlotMachine = () => {
     const [isSpinning, setIsSpinning] = useState<boolean>(false);
     const [columns, setColumns] = useState<IColumn[]>([]);
-    // const [results, setResults] = useState<IColumn[]>([]);
   
     useEffect(() => {
       const initializeColumns = () => {
@@ -57,7 +56,6 @@ export const useSlotMachine = () => {
               return col;
             })
           );
-          // setResults(col)
         }, stopDelay * 1000);
       });
       const totalDuration = BASE_SPINNING_DURATION + columns.length * COLUMN_SPINNING_DURATION;
@@ -65,7 +63,7 @@ export const useSlotMachine = () => {
     };
  
     function getRandomIcon() {
-      return ICONS[Math.floor(Math.random() * ICONS.length/3)];
+      return ICONS[Math.floor(Math.random() * ICONS.length)];
       // icons.length/3 para q sea mas facil ganar, sino simplemente icons.length
       }
 

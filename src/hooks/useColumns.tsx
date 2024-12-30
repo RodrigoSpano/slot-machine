@@ -4,6 +4,7 @@ import type { TUseColumnsProps } from '@/types';
 
 export const useColumns = ({duration,isSpinning,items}: TUseColumnsProps) => {
     const colRef = useRef<HTMLDivElement>(null);
+    
 
   useEffect(() => {
     if (!isSpinning) {
