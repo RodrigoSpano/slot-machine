@@ -1,5 +1,8 @@
+import type { TButtonProps } from "../../types";
+import React from "react";
 
-function Button({ onClick, disabled }) {
+
+const Button: React.FC<TButtonProps> = ({ onClick, disabled }) => {
   return (
     <input
       type="button"

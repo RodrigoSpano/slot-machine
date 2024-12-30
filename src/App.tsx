@@ -3,7 +3,7 @@ import SlotMachine from "./components/machine/SlotMachine"
 
 function App() {
   return (
-   <div>
+   <div className="App">
     <SlotMachine />
    </div>
   )
