@@ -1,5 +1,5 @@
 import { useEffect, useRef } from 'react'
-import type { TUseColumnsProps } from '../types';
+import type { TUseColumnsProps } from '@/types';
 
 
 export const useColumns = ({duration,isSpinning,items}: TUseColumnsProps) => {

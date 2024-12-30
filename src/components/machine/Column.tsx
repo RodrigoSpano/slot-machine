@@ -1,6 +1,6 @@
 import React from 'react';
 import './Column.css';
-import type { TColumnProps } from '../../types';
+import type { TColumnProps } from '@/types';
 import { useColumns } from '../../hooks/useColumns';
 
 

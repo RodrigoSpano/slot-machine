@@ -1,4 +1,4 @@
-import type { TButtonProps } from "../../types";
+import type { TButtonProps } from "@/types";
 import React from "react";
 
 

@@ -1,4 +1,4 @@
-import { IDb_item } from "../types"
+import type { IDb_item } from "@/types"
 
 export const icons: IDb_item[] = [
         {

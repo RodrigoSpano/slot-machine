@@ -5,7 +5,7 @@ import { useSlotMachine } from '../../hooks/useSlotMachine';
 
 
 function SlotMachine() {
- const {columns,handleSpin,isSpinning} = useSlotMachine()
+ const {columns,handleSpin,isSpinning, } = useSlotMachine()
 
   return (
     <div className="slot-machine">
