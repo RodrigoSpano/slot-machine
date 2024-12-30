@@ -10,7 +10,6 @@ function SlotMachine() {
     <div className="slot-machine">
       <div className="window-border">
         <div className="window">
-          
           {columns.map((col, index) => (
             <Column
               key={index}

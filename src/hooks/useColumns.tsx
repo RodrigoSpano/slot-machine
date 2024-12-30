@@ -1,10 +1,12 @@
 import { useEffect, useRef } from 'react'
 import type { TUseColumnsProps } from '@/types';
+import { useColumnResult } from '../stores/useResultStore';
 
 
 export const useColumns = ({duration,isSpinning,items}: TUseColumnsProps) => {
     const colRef = useRef<HTMLDivElement>(null);
-    
+    // column results from zustand =>
+    const {result: resultState, appendResults} = useColumnResult()
 
   useEffect(() => {
     if (!isSpinning) {
@@ -30,6 +32,15 @@ export const useColumns = ({duration,isSpinning,items}: TUseColumnsProps) => {
       }
     }
   }, [isSpinning, duration, items.length]);
+
+  useEffect(()=>{
+    if(!isSpinning){
+      const column_result = colRef.current?.children[1].getAttribute("data-item")
+      if(resultState?.length >= 3) return
+      if(!column_result) return
+      appendResults(column_result)
+    }
+  },[isSpinning])
 
   // Duplicar los íconos para una animación continua
   const duplicatedItems = [...items, ...items];

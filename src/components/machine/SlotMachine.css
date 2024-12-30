@@ -1,9 +1,8 @@
-
-
-.start-button {
-    display: block;
-    margin: 1em auto;
+.slot-machine {
+    display: flex;
+    flex-direction: column;
 }
+
 
 #container {
     background-color: #fd9b03;

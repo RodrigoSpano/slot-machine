@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 import {icons as ICONS} from "../utils/db"
 import type { IColumn } from '@/types';
+import { useColumnResult } from '../stores/useResultStore';
 
 
 const BASE_SPINNING_DURATION = 2.7; // Duración base del spin en segundos
@@ -10,6 +11,7 @@ const COLUMNS_NUM = 3
 export const useSlotMachine = () => {
     const [isSpinning, setIsSpinning] = useState<boolean>(false);
     const [columns, setColumns] = useState<IColumn[]>([]);
+    const {clearResults} = useColumnResult()
   
     useEffect(() => {
       const initializeColumns = () => {
@@ -31,6 +33,7 @@ export const useSlotMachine = () => {
     }, []);
   
     const handleSpin = () => {
+      clearResults()
       setIsSpinning(true);
     
       columns.forEach((_, index) => {
@@ -64,7 +67,6 @@ export const useSlotMachine = () => {
  
     function getRandomIcon() {
       return ICONS[Math.floor(Math.random() * ICONS.length)];
-      // icons.length/3 para q sea mas facil ganar, sino simplemente icons.length
       }
 
     return {
