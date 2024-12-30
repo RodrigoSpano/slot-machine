@@ -1,0 +1,21 @@
+.outer-col {
+  overflow: hidden;
+  height: 200px; /* Altura de la ventana visible */
+  position: relative;
+}
+
+.col {
+  display: flex;
+  flex-direction: column;
+  animation: spin linear infinite;
+  will-change: transform; /* Mejora el rendimiento en animaciones */
+}
+
+.col.spinning {
+  animation-play-state: running; /* Animación en curso */
+}
+
+@keyframes spin {
+  0% { transform: translateY(0); }
+  100% { transform: translateY(-50%); } /* Mover la mitad del contenido duplicado */
+}
