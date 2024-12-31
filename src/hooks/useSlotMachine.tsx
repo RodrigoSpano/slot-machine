@@ -22,7 +22,6 @@ export const useSlotMachine = () => {
     return weightedIcons[Math.floor(Math.random() * weightedIcons.length)];
   };
 
-  // Manejo del spin
   const handleSpin = () => {
     clearResults();
     setIsSpinning(true);
