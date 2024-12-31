@@ -52,7 +52,7 @@ export const useSlotMachine = () => {
           setColumns((prev) =>
             prev.map((col, i) => {
               if (i === index) {
-                const results = [getRandomIcon(), getRandomIcon(), getRandomIcon()];
+                const results = [getRandomIcon(true), getRandomIcon(true), getRandomIcon(true)];
                 const updatedItems = [...results, ...col.items.slice(3, col.items.length - 3), ...results];
                 return { ...col, items: updatedItems, isSpinning: false };
               }
@@ -65,8 +65,10 @@ export const useSlotMachine = () => {
       setTimeout(() => setIsSpinning(false), totalDuration * 1000);
     };
  
-    function getRandomIcon() {
-      return ICONS[Math.floor(Math.random() * ICONS.length)];
+    function getRandomIcon(val?: boolean) {
+      // this bool was added to make it easier to win, if you want to leave it normal, remove de prop valand only leave the false case
+      if(!val)  return ICONS[Math.floor(Math.random() * ICONS.length)]
+      else return ICONS[Math.floor(Math.random() * ICONS.length/2)];
       }
 
     return {
