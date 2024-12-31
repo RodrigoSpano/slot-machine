@@ -16,7 +16,8 @@ export const useSlotMachine = () => {
   // Generador ponderado para elegir ítems
   const getWeightedRandomIcon = () => {
     const weightedIcons = ICONS.flatMap((icon) => {
-      if (icon.name === PRIZE_CONDITIONS_ENUM.BIG_WIN || icon.name === PRIZE_CONDITIONS_ENUM.SPECIAL_WIN) return Array(2).fill(icon); // Menor peso
+      if (icon.name === PRIZE_CONDITIONS_ENUM.BIG_WIN) return Array(4).fill(icon); // Menor peso
+      else if(icon.name === PRIZE_CONDITIONS_ENUM.SPECIAL_WIN) return Array(7).fill(icon) // menor peso
       return Array(10).fill(icon); // Mayor peso para frutas
     });
     return weightedIcons[Math.floor(Math.random() * weightedIcons.length)];
@@ -46,6 +47,7 @@ export const useSlotMachine = () => {
               const randomProbability = Math.random()
               const isWin = randomProbability < normalWinProbability;
 
+              console.log(prev[0]?.items.slice(0, 3))
               // Generar resultados base
               const baseResults = isWin
                 ? prev[0]?.items.slice(0, 3) || [getWeightedRandomIcon(), getWeightedRandomIcon(), getWeightedRandomIcon()]
@@ -77,9 +79,9 @@ export const useSlotMachine = () => {
 
   useEffect(() => {
     const initializeColumns = () => {
-      const baseItemAmount = 40;
+      const baseItemAmount = 50;
 
-      const newColumns = Array(COLUMNS_NUM).fill(null).map((_, i) => {
+      const newColumns: IColumn[] = Array(COLUMNS_NUM).fill(null).map((_, i) => {
         const amount = baseItemAmount + (i * 20);
 
         // Generar ítems con mayor probabilidad para frutas
@@ -93,10 +95,11 @@ export const useSlotMachine = () => {
           duration: BASE_SPINNING_DURATION + i * COLUMN_SPINNING_DURATION,
         };
       });
-
       setColumns(newColumns);
-
+      console.log('big',newColumns.map(el => el.items.filter(l => l.name === PRIZE_CONDITIONS_ENUM.BIG_WIN)))
+      console.log('special',newColumns.map(el => el.items.filter(l => l.name === PRIZE_CONDITIONS_ENUM.SPECIAL_WIN)))
 };
+
 
     initializeColumns();
   }, []);
