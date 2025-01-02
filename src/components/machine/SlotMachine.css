@@ -1,5 +1,6 @@
 :root {
     --item-height: 200px;
+    user-select: none;
 }
 
 .slot-container {
