@@ -1,4 +1,4 @@
-import type { IColumn } from '@/types';
+import type { IColumn, IDb_item } from '@/types';
 import { useState, useEffect } from 'react';
 import { icons as ICONS } from "../utils/db";
 import { useColumnResult } from '../stores/useResultStore';
@@ -16,7 +16,7 @@ export const useSlotMachine = () => {
   // Generador ponderado para elegir ítems
   const getWeightedRandomIcon = () => {
     const weightedIcons = ICONS.flatMap((icon) => {
-      if (icon.name === PRIZE_CONDITIONS_ENUM.BIG_WIN) return Array(4).fill(icon); // Menor peso
+      if (icon.name === PRIZE_CONDITIONS_ENUM.BIG_WIN) return Array(5).fill(icon); // Menor peso
       else if(icon.name === PRIZE_CONDITIONS_ENUM.SPECIAL_WIN) return Array(7).fill(icon) // menor peso
       return Array(10).fill(icon); // Mayor peso para frutas
     });
@@ -76,6 +76,22 @@ export const useSlotMachine = () => {
     setTimeout(() => setIsSpinning(false), totalDuration * 1000);
   };
   
+  const handleMinimumSpecialItems = (items: IDb_item[]) => {
+    const itemsCopy: IDb_item[] = [...items]
+    const BigWinITems = itemsCopy.filter(el => el.name === PRIZE_CONDITIONS_ENUM.BIG_WIN)
+    const SpecialWinItems = itemsCopy.filter(el => el.name === PRIZE_CONDITIONS_ENUM.SPECIAL_WIN) 
+
+    if(!BigWinITems.length) {
+      const bigItem = ICONS.find(el => el.name === PRIZE_CONDITIONS_ENUM.BIG_WIN) as IDb_item
+      itemsCopy.push(bigItem)
+    }
+    if(!SpecialWinItems.length) {
+      const specialItem = ICONS.find(el => el.name === PRIZE_CONDITIONS_ENUM.SPECIAL_WIN) as IDb_item
+      itemsCopy.push(specialItem)
+    }
+
+    return itemsCopy
+  }
 
   useEffect(() => {
     const initializeColumns = () => {
@@ -85,9 +101,9 @@ export const useSlotMachine = () => {
         const amount = baseItemAmount + (i * 20);
 
         // Generar ítems con mayor probabilidad para frutas
-        const randomItems = Array.from({ length: amount }, getWeightedRandomIcon);
-
-        const shuffledItems = randomItems.sort(() => Math.random() - 0.5);
+        const randomItems: IDb_item[] = Array.from({ length: amount }, getWeightedRandomIcon);
+        const validatedItems = handleMinimumSpecialItems(randomItems)
+        const shuffledItems = validatedItems.sort(() => Math.random() - 0.5);
 
         return {
           items: shuffledItems,
