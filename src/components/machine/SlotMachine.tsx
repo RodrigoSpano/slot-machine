@@ -3,10 +3,10 @@ import './SlotMachine.css';
 import { useSlotMachine } from '../../hooks/useSlotMachine';
 
 function SlotMachine() {
- const {columns,handleSpin} = useSlotMachine()
+ const {columns,handleSpin, isSpinning} = useSlotMachine()
 
   return (
-    <div className='slot-container' onClick={handleSpin}>
+    <div className='slot-container' onClick={() => !isSpinning && handleSpin()}>
       <div className="slot-machine">
         <div className="window-border">
           <div className="window">
